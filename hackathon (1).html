@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Suggestion Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid #5cb85c;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #4cae4c;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        #results {
+            margin-top: 30px;
+            text-align: left;
+            display: none;
+        }
+        #results h2 {
+            color: #5cb85c;
+            border-bottom: 2px solid #5cb85c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        #results div {
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 5px solid #5cb85c;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Crop Suggestion Tool</h1>
+        <input type="text" id="cropInput" placeholder="Enter crop name" oninput="clearSuggestions()">
+        <button onclick="getSuggestions()">Get Suggestions</button>
+
+        <div id="results">
+            <h2>Suggestions:</h2>
+            <div id="fertilizer"></div>
+            <div id="pesticides"></div>
+            <div id="weather"></div>
+            <div id="soil"></div>
+        </div>
+    </div>
+
+    <script>
+        function clearSuggestions() {
+            var cropName = document.getElementById('cropInput').value;
+            if (cropName.trim() === "") {
+                document.getElementById('results').style.display = 'none';
+            }
+        }
+
+        function getSuggestions() {
+            var cropName = document.getElementById('cropInput').value.toLowerCase().trim();
+            var fertilizers, pesticides, weather, soil;
+
+            if (cropName === "") {
+                document.getElementById('results').style.display = 'none';
+                return;
+            }
+
+            switch(cropName) {
+                case 'wheat':
+                    fertilizers = 'Recommended Fertilizers: Urea, DAP, Potash.';
+                    pesticides = 'Common Pesticides: Chlorpyrifos, Imidacloprid.';
+                    weather = 'Ideal Weather: Cool, dry climates with temperatures between 15-25°C.';
+                    soil = 'Suitable Soil: Well-drained loamy or clayey soils.';
+                    break;
+                case 'rice':
+                    fertilizers = 'Recommended Fertilizers: Urea, SSP, Potash.';
+                    pesticides = 'Common Pesticides: Carbofuran, Buprofezin.';
+                    weather = 'Ideal Weather: Warm, wet climates with temperatures between 20-35°C.';
+                    soil = 'Suitable Soil: Clayey, loamy soils with good water retention.';
+                    break;
+                case 'corn':
+                    fertilizers = 'Recommended Fertilizers: NPK, Urea, Ammonium nitrate.';
+                    pesticides = 'Common Pesticides: Atrazine, Glyphosate.';
+                    weather = 'Ideal Weather: Warm climates with temperatures between 18-27°C.';
+                    soil = 'Suitable Soil: Well-drained loamy soils.';
+                    break;
+                case 'soybean':
+                    fertilizers = 'Recommended Fertilizers: NPK, Potassium sulfate.';
+                    pesticides = 'Common Pesticides: Lambda-cyhalothrin, Chlorpyrifos.';
+                    weather = 'Ideal Weather: Warm climates with temperatures between 20-30°C.';
+                    soil = 'Suitable Soil: Well-drained sandy loam soils.';
+                    break;
+                case 'potato':
+                    fertilizers = 'Recommended Fertilizers: Urea, DAP, MOP.';
+                    pesticides = 'Common Pesticides: Mancozeb, Chlorothalonil.';
+                    weather = 'Ideal Weather: Cool climates with temperatures between 15-20°C.';
+                    soil = 'Suitable Soil: Well-drained sandy loam soils.';
+                    break;
+                case 'tomato':
+                    fertilizers = 'Recommended Fertilizers: NPK, Calcium nitrate.';
+                    pesticides = 'Common Pesticides: Imidacloprid, Chlorothalonil.';
+                    weather = 'Ideal Weather: Warm climates with temperatures between 20-25°C.';
+                    soil = 'Suitable Soil: Well-drained loamy soils rich in organic matter.';
+                    break;
+                case 'cotton':
+                    fertilizers = 'Recommended Fertilizers: Urea, DAP, Potash.';
+                    pesticides = 'Common Pesticides: Imidacloprid, Cypermethrin.';
+                    weather = 'Ideal Weather: Warm climates with temperatures between 21-27°C.';
+                    soil = 'Suitable Soil: Deep, well-drained sandy loam soils.';
+                    break;
+                case 'sugarcane':
+                    fertilizers = 'Recommended Fertilizers: NPK, Urea, Potash.';
+                    pesticides = 'Common Pesticides: Chlorpyrifos, Imidacloprid.';
+                    weather = 'Ideal Weather: Hot climates with temperatures between 20-30°C.';
+                    soil = 'Suitable Soil: Well-drained loamy soils rich in organic matter.';
+                    break;
+                case 'banana':
+                    fertilizers = 'Recommended Fertilizers: NPK, Urea, Potash.';
+                    pesticides = 'Common Pesticides: Imidacloprid, Carbofuran.';
+                    weather = 'Ideal Weather: Warm, humid climates with temperatures between 20-30°C.';
+                    soil = 'Suitable Soil: Well-drained loamy soils rich in organic matter.';
+                    break;
+                case 'tea':
+                    fertilizers = 'Recommended Fertilizers: NPK, Ammonium sulfate.';
+                    pesticides = 'Common Pesticides: Chlorpyrifos, Imidacloprid.';
+                    weather = 'Ideal Weather: Cool, moist climates with temperatures between 20-30°C.';
+                    soil = 'Suitable Soil: Acidic, well-drained loamy soils.';
+                    break;
+                default:
+                    fertilizers = 'No data available for this crop.';
+                    pesticides = '';
+                    weather = '';
+                    soil = '';
+                    break;
+            }
+
+            document.getElementById('fertilizer').innerHTML = fertilizers;
+            document.getElementById('pesticides').innerHTML = pesticides;
+            document.getElementById('weather').innerHTML = weather;
+            document.getElementById('soil').innerHTML = soil;
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
